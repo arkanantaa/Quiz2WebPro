@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Register</title>
+<link rel="stylesheet" type="text/css" href="css/register.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 <form action=RegisterServlet method=post>
@@ -59,7 +61,6 @@
 		<tr><td>Confirm Password: <input type=password name=txtConfirmPassword> </td></tr>
 		<tr>
 			<td><input type=submit value=Register></td>
-			<td><input type=reset></td></tr>
 	</table>	
 </form>
 <p>If you already have an account, click <a href="index.jsp">here</a> to login.</p>

@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.jasper.tagplugins.jstl.core.Out;
 
 /**
  * Servlet implementation class LoginServlet
