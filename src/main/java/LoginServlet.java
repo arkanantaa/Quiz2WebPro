@@ -51,9 +51,6 @@ public class LoginServlet extends HttpServlet {
 			String user = request.getParameter("txtUsername");	
 			String pass = request.getParameter("txtPassword");
 			
-			System.out.println(user);
-			System.out.println(pass);
-			
 			PreparedStatement ps = conn.prepareStatement("SELECT UserName FROM Users WHERE UserName = ? AND UserPassword = ?");
 			ps.setString(1, user);
 			ps.setString(2, pass);
@@ -64,8 +61,10 @@ public class LoginServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 			else {
-				output.println("<meta http-equiv='refresh' content='3;URL=index.jsp'>");//redirects after 3 seconds
-				output.println("<p style='color:red;'>User or password incorrect!</p>");
+				output.println("<script type='text/javascript'>");
+				output.println("alert('User or password incorrect!');");
+				output.println("location='index.jsp';");
+				output.println("</script>");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
