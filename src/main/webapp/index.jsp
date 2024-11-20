@@ -10,9 +10,9 @@
 </head>
 <body>
 <img src="resource/logo.png" alt="logo pict">
-<form action=LoginServlets method=post>
+<form action=LoginServlet method=post>
 	<table>
-		<tr><td>Username: <input type=text name=txtName> </td></tr>
+		<tr><td>Username: <input type=text name=txtUsername> </td></tr>
 		<tr><td>Password: <input type=password name=txtPassword> </td></tr>
 		<tr><td><input type=submit value=Login></td></tr>
 	</table>	
