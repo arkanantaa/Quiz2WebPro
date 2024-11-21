@@ -1,81 +1,72 @@
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-@WebServlet("/register")
+@WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public RegisterServlet() {
-        super();
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String url = "jdbc:mysql://localhost:3306/Storify";
+        String username = "root"; // Ganti jika user MySQL berbeda
+        String password = "";     // Ganti jika ada password untuk MySQL
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html");
+
+        // Ambil data dari form
+        String userName = request.getParameter("txtUsername");
+        String fullName = request.getParameter("txtFullName");
+        String email = request.getParameter("txtEmail");
+        String address = request.getParameter("txtAddress");
+        String passwordInput = request.getParameter("txtPassword");
+
+        // Format Date of Birth
+        String dobDay = request.getParameter("dobDay");
+        String dobMonth = request.getParameter("dobMonth");
+        String dobYear = request.getParameter("dobYear");
+        String dateOfBirth = dobYear + "-" + dobMonth + "-" + dobDay; // Format YYYY-MM-DD
+
         try {
-            PrintWriter output = response.getWriter();
-            response.setContentType("text/html");
+            // Koneksi ke database
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Storify", "root", "");
+            Connection conn = DriverManager.getConnection(url, username, password);
 
-            String email = request.getParameter("txtEmail");
-            String user = request.getParameter("txtUsername");
-            String pass = request.getParameter("txtPassword");
-            String dob = request.getParameter("txtDOB");
-            String fullName = request.getParameter("txtFullName");
-            String address = request.getParameter("txtAddress");
-            
-            System.out.println(email + " " + user + " " + pass + " " + dob + " " + fullName + " " + address);
+            // Query untuk insert data
+            String sql = "INSERT INTO Users (UserEmail, UserName, UserPassword, UserDOB, UserFullName, UserAddress) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, userName);
+            ps.setString(3, passwordInput);
+            ps.setString(4, dateOfBirth);
+            ps.setString(5, fullName);
+            ps.setString(6, address);
 
-            PreparedStatement psCheck = conn.prepareStatement("SELECT UserName FROM Users WHERE UserName = ? OR UserEmail = ?");
-            psCheck.setString(1, user);
-            psCheck.setString(2, email);
-            ResultSet rsCheck = psCheck.executeQuery();
+            int rows = ps.executeUpdate();
 
-            if (rsCheck.next()) {
-                output.println("<script type='text/javascript'>");
-                output.println("alert('Username or Email already exists!');");
-                output.println("location='register.jsp';");
-                output.println("</script>");
+            if (rows > 0) {
+            	out.println("<script type='text/javascript'>");
+                out.println("alert('Registration successful! You can now log in.');");
+                out.println("window.location.href = 'login.jsp';");
+                out.println("</script>");
             } else {
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO Users (UserName, UserFullName, UserEmail, UserAddress, UserDOB, UserPassword) VALUES (?, ?, ?, ?, ?, ?)");
-                ps.setString(1, email);
-                ps.setString(2, user);
-                ps.setString(3, pass);
-                ps.setString(4, dob);
-                ps.setString(5, fullName);
-                ps.setString(6, address);
-                int result = ps.executeUpdate();
-
-                if (result > 0) {
-                    output.println("<script type='text/javascript'>");
-                    output.println("alert('Registration successful!');");
-                    output.println("location='login.jsp';");
-                    output.println("</script>");
-                } else {
-                    output.println("<script type='text/javascript'>");
-                    output.println("alert('Registration failed!');");
-                    output.println("location='register.jsp';");
-                    output.println("</script>");
-                }
+            	out.println("<script type='text/javascript'>");
+                out.println("alert('Registration failed! Please try again.');");
+                out.println("window.location.href = 'register.jsp';");
+                out.println("</script>");
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<h1>Error occurred: " + e.getMessage() + "</h1>");
+        }
     }
 }
