@@ -15,7 +15,7 @@
     <!-- Navigation Bar -->
     <ul>
         <li><a class="active" href="dashboard.jsp"><img src="resource/logo.png" height="20px"></a></li>
-        <li><a href="Stock.jsp">Stock</a></li>
+        <li><a href="InputProduct.jsp">Input Product</a></li>
         <li><a href="Profile.jsp">Profile</a></li>
     </ul>
 
@@ -33,7 +33,6 @@
                     <th>Product Name</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Last Updated By</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,7 +56,6 @@
                     <td><%= rs.getString("ProductName") %></td>
                     <td><%= rs.getInt("ProductQuantity") %></td>
                     <td><%= rs.getDouble("ProductPrice") %></td>
-                    <td><%= rs.getString("last_updated_by") != null ? rs.getString("last_updated_by") : "N/A" %></td>
                 </tr>
                 <%
                     }

@@ -11,13 +11,13 @@
 <body>
 	<ul>
         <li><a href="dashboard.jsp"><img src="resource/logo.png" height="20px"></a></li>
-        <li><a class="active" href="InputProduct.jsp">Add Product</a></li>
-        <li><a> Profile</a></li>
+        <li><a class="active" href="InputProduct.jsp">Input Product</a></li>
+        <li><a href="Profile.jsp">Profile</a></li>
     </ul>
     <main>
     	<div class="form-container">
 	        <h1>Insert Product</h1>
-	        <form action="AddProduct" method="post">
+	        <form action="InputProductServlet" method="post">
 	            <table>
 	                <tr>
 	                    <td><label for="productName">Product Name</label></td>

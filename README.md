@@ -24,11 +24,5 @@ CREATE TABLE Products (
     ProductQuantity INT NOT NULL,
     ProductPrice DECIMAL(10, 2) NOT NULL
 );
-
-
-/3 catat siapa yang update terakhir
-
-ALTER TABLE Products ADD last_updated_by INT;
-ALTER TABLE Products ADD FOREIGN KEY (last_updated_by) REFERENCES Users(UserID);
 ```
 

@@ -39,4 +39,14 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InputProduct</display-name>
+    <servlet-name>InputProduct</servlet-name>
+    <servlet-class>InputProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InputProduct</servlet-name>
+    <url-pattern>/InputProduct</url-pattern>
+  </servlet-mapping>
 </web-app>
