@@ -52,22 +52,12 @@
                 </select>
             </div>
 
-            <label for="gender">Select Gender:</label>
-            <select id="gender" name="gender">
-                <option value="" disabled selected>Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-
             <label for="txtPassword">Enter Password:</label>
             <input type="password" id="txtPassword" name="txtPassword">
-
-            <label for="txtConfirmPassword">Confirm Password:</label>
-            <input type="password" id="txtConfirmPassword" name="txtConfirmPassword">
 			
             <input type="submit" value="Register">
 
-            <p>If you already have an account, click <a href="index.jsp">here</a> to login.</p>
+            <p>If you already have an account, click <a href="login.jsp">here</a> to login.</p>
         </form>
     </div>
 </body>

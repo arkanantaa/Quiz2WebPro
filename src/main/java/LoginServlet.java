@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 			else {
 				output.println("<script type='text/javascript'>");
 				output.println("alert('User or password incorrect!');");
-				output.println("location='index.jsp';");
+				output.println("location='login.jsp';");
 				output.println("</script>");
 			}
 		} catch (ClassNotFoundException e) {
