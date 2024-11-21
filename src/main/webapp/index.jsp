@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<img src="resource/logo.png" alt="logo pict">
+<img src="resource/logo_white.png" alt="logo pict">
 <form action=LoginServlet method=post>
 	<table>
 		<tr><td>Username: <input type=text name=txtUsername> </td></tr>

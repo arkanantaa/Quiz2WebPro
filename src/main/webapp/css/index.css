@@ -3,7 +3,10 @@ body {
     font-family:'Nunito', sans-serif;	
     margin: 0;
     padding: 0;
-    background-color: #F0DBC5;
+    background-image: url('../resource/login_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column; /* Stacks elements vertically */
     justify-content: center; /* Centers vertically */
