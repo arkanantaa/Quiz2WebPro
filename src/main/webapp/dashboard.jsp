@@ -12,19 +12,16 @@
     <title>Storify - Product List</title>
 </head>
 <body>
-<!-- Navigation Bar -->
 <ul>
     <li><a class="active" href="dashboard.jsp"><img src="resource/logo.png" height="20px"></a></li>
     <li><a href="InputProduct.jsp">Input Product</a></li>
     <li><a href="profile.jsp">Profile</a></li>
 </ul>
 
-<!-- Header Section -->
 <header>
     <h1>Welcome to Storify - Product List</h1>
 </header>
 
-<!-- Main Content -->
 <main>
     <table border="1">
         <thead>
@@ -58,13 +55,11 @@
                 <td><%= rs.getInt("ProductQuantity") %></td>
                 <td><%= rs.getDouble("ProductPrice") %></td>
                 <td class="action-buttons">
-                    <!-- Update Form -->
                     <form action="UpdateProductServlet" method="GET" style="display: inline;">
                         <input type="hidden" name="productId" value="<%= productId %>">
                         <button type="submit" class="btn update-btn">Update</button>
                     </form>
                     
-                    <!-- Delete Form -->
                     <form action="DeleteProductServlet" method="POST" style="display: inline;" 
                           onsubmit="return confirm('Are you sure you want to delete this product?');">
                         <input type="hidden" name="productID" value="<%= productId %>">

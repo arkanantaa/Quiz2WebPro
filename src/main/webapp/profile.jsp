@@ -24,11 +24,9 @@
             <h1>Your Profile</h1>
             <form action="UpdateUserServlet" method="post">
                 <%
-                // Mendapatkan username dari session
                 String loggedUser = (String) session.getAttribute("loggedUser");
 
                 if (loggedUser == null) {
-                    // Jika tidak ada user yang login, redirect ke halaman login
                     response.sendRedirect("login.jsp");
                 } else {
                     try {
@@ -86,7 +84,6 @@
                 %>
             </form>
 
-            <!-- Tombol Logout -->
             <form action="LogoutServlet" method="post">
                 <button type="submit">Logout</button>
             </form>
