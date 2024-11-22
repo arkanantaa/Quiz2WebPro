@@ -59,7 +59,7 @@ main {
     padding: 20px 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 80px 175px;
+    margin: 80px 200px;
 }
 
 .form-container h1 {
@@ -69,10 +69,10 @@ main {
 
 .form-container table {
     width: 100%;
-    border-collapse: seperate;
+    border-collapse: collapse;
 }
 .form-container tbody td:first-child {
-    width: 125px; /* Lebar tetap untuk kolom "No" */
+    width: 165px; /* Lebar tetap untuk kolom "No" */
 }
 
 .form-container label {
@@ -81,34 +81,29 @@ main {
     font-weight: bold;
 }
 
-.form-container tbody tr:not(:last-child) td:last-child {
+.form-container input {
     width: calc(100% - 10px);
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
     box-sizing: border-box;
-    margin-bottom: 5px;
-}
-
-.form-container tbody tr:last-child {
-	margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .form-container .button-container {
     text-align: right;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .form-container button {
     padding: 8px 20px;
     font-size: 14px;
     font-weight: bold;
-    background-color: red;
+    background-color: #D4AF37;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    align-items: right;
 }
 
 .form-container button:hover {
