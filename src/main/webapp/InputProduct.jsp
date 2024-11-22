@@ -12,7 +12,7 @@
 	<ul>
         <li><a href="dashboard.jsp"><img src="resource/logo.png" height="20px"></a></li>
         <li><a class="active" href="InputProduct.jsp">Input Product</a></li>
-        <li><a href="Profile.jsp">Profile</a></li>
+        <li><a href="profile.jsp">Profile</a></li>
     </ul>
     <main>
     	<div class="form-container">

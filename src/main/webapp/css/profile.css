@@ -72,7 +72,7 @@ main {
     border-collapse: collapse;
 }
 .form-container tbody td:first-child {
-    width: 165px; /* Lebar tetap untuk kolom "No" */
+    width: 165px; 
 }
 
 .form-container label {

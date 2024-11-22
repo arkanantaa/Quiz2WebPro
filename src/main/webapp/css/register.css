@@ -1,4 +1,3 @@
-/* General body styling */
 body {
     font-family: 'Nunito', sans-serif;
     margin: 0;
@@ -8,31 +7,29 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    justify-content: flex-end; /* Align the white box to the right */
+    justify-content: flex-end; 
     align-items: center;
     height: 100vh;
 }
 
-/* Form container with the white box */
 .form-container {
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 40px;
-    width: 40%; /* Adjust width to your preference */
-    margin-right: 5%; /* Add some spacing from the edge */
+    width: 40%; 
+    margin-right: 5%; 
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Consistent spacing between elements */
+    gap: 20px;
 }
 
-/* Input fields and select drop downs */
 .form-container input[type="text"],
 .form-container input[type="password"],
 .form-container select {
     width: 100%;
     padding: 10px;
-    margin: 5px 0; /* Adjust spacing between elements */
+    margin: 5px 0; 
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
@@ -41,21 +38,19 @@ body {
 .form-container label {
     font-weight: bold;
     margin-bottom: 5px;
-    display: block; /* Ensure labels take full width */
-    font-size: 14px; /* Matches font size for consistency */
+    display: block; 
+    font-size: 14px;
 }
 
-/* Date of Birth Container */
 .dob-container {
     display: flex;
-    gap: 10px; /* Adds space between dropdowns */
+    gap: 10px; 
 }
 
 .dob-container select {
-    flex: 1; /* Ensures dropdowns are evenly spaced */
+    flex: 1; 
 }
 
-/* Buttons */
 .form-container input[type="submit"] {
     background-color: #D4AF37;
     color: white;
@@ -72,7 +67,6 @@ body {
     background-color: #B8860B;
 }
 
-/* Link styling */
 .form-container p a {
     color: blue;
     text-decoration: none;
@@ -83,18 +77,17 @@ body {
     text-decoration: underline;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     body {
-        justify-content: center; /* Center the box on small screens */
+        justify-content: center; 
     }
 
     .form-container {
-        width: 90%; /* Make the box wider on small screens */
+        width: 90%; 
         margin-right: 0;
     }
 
     .dob-container {
-        flex-direction: column; /* Stacks dropdowns */
+        flex-direction: column; 
     }
 }

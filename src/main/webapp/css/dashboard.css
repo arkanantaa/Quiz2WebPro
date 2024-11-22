@@ -1,10 +1,8 @@
-/* Reset margin and padding */
 body {
     margin: 0;
     font-family:'Nunito', sans-serif;
 }
 
-/* Navbar styling */
 ul {
     list-style-type: none;
     margin: 0;
@@ -16,12 +14,10 @@ ul {
     align-items: center;
 }
 
-/* Navbar items */
 ul li {
     display: inline;
 }
 
-/* Links styling */
 ul li a {
     color: black;
     text-decoration: none;
@@ -30,7 +26,6 @@ ul li a {
     text-align: center;
 }
 
-/* Hover effect */
 ul li a:hover {
     background-color: #C4B5A5;
 }
@@ -39,7 +34,6 @@ ul li a:hover {
 	background-color: #C4B5A5;
 }
 
-/* Alignment: left for first item, right for last item */
 ul li:first-child {
     height: auto;
 }
@@ -48,7 +42,6 @@ ul li:last-child {
     margin-left: auto;
 }
 
-/* Header styling */
 header {
     text-align: center;
     padding: 20px;
@@ -59,7 +52,6 @@ header h1 {
     margin: 0;
 }
 
-/* Main content styling */
 main {
     padding: 20px;
     max-width: 900px;
@@ -71,7 +63,6 @@ main h1 {
     margin-bottom: 20px;
 }
 
-/* Table styling */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -96,8 +87,8 @@ tbody td {
 }
 
 thead th:first-child, tbody td:first-child {
-    width: 30px; /* Lebar tetap untuk kolom "No" */
-    text-align: center; /* Opsional: Teks diratakan ke tengah */
+    width: 30px; 
+    text-align: center; 
 }
 
 
