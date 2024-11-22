@@ -10,40 +10,13 @@
     <link rel="stylesheet" type="text/css" href="css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
     <title>Storify - Product List</title>
-    <style>
-        .btn {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            margin: 2px;
-            color: white;
-        }
-        .delete-btn {
-            background-color: #ff4444;
-        }
-        .delete-btn:hover {
-            background-color: #cc0000;
-        }
-        .update-btn {
-            background-color: #4CAF50;
-        }
-        .update-btn:hover {
-            background-color: #45a049;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 5px;
-            justify-content: center;
-        }
-    </style>
 </head>
 <body>
 <!-- Navigation Bar -->
 <ul>
     <li><a class="active" href="dashboard.jsp"><img src="resource/logo.png" height="20px"></a></li>
     <li><a href="InputProduct.jsp">Input Product</a></li>
-    <li><a href="Profile.jsp">Profile</a></li>
+    <li><a href="profile.jsp">Profile</a></li>
 </ul>
 
 <!-- Header Section -->

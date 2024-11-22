@@ -1,61 +1,53 @@
-import jakarta.servlet.RequestDispatcher;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/UpdateUserServlet")
 public class UpdateUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Storify", "root", "")) {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE UserId = ?");
-            ps.setInt(1, userId);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                request.setAttribute("user", rs);
-                RequestDispatcher rd = request.getRequestDispatcher("UpdateUser.jsp");
-                rd.forward(request, response);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        String userName = request.getParameter("userName");
-        String userFullName = request.getParameter("userFullName");
-        String userEmail = request.getParameter("userEmail");
-        String userAddress = request.getParameter("userAddress");
+        HttpSession session = request.getSession(false);
+        String loggedUser = (session != null) ? (String) session.getAttribute("loggedUser") : null;
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Storify", "root", "")) {
-            PreparedStatement ps = conn.prepareStatement("UPDATE Users SET UserName = ?, UserFullName = ?, UserEmail = ?, UserAddress = ? WHERE UserId = ?");
-            ps.setString(1, userName);
-            ps.setString(2, userFullName);
-            ps.setString(3, userEmail);
-            ps.setString(4, userAddress);
-            ps.setInt(5, userId);
+        if (loggedUser == null) {
+            response.getWriter().println("<p>You are not authorized to update this profile.</p>");
+            return;
+        }
 
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                response.sendRedirect("Profile.jsp"); // Mengarahkan ke halaman profil setelah update
+        String name = request.getParameter("name");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String dob = request.getParameter("dob");
+        String address = request.getParameter("address");
+
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/storify", "root", "");
+             PreparedStatement pstmt = conn.prepareStatement(
+                "UPDATE users SET UserFullName=?, UserPassword=?, UserEmail=?, UserDOB=?, UserAddress=? WHERE UserName=?"
+             )) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, password);
+            pstmt.setString(3, email);
+            pstmt.setString(4, dob);
+            pstmt.setString(5, address);
+            pstmt.setString(6, loggedUser);
+
+            int updatedRows = pstmt.executeUpdate();
+            if (updatedRows > 0) {
+                response.sendRedirect("profile.jsp");
+            } else {
+                response.getWriter().println("<p>Failed to update profile. Try again later.</p>");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            response.getWriter().println("<p>Error updating profile.</p>");
         }
     }
 }
