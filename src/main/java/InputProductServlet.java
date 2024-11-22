@@ -16,22 +16,19 @@ public class InputProductServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = "jdbc:mysql://localhost:3306/Storify";
-        String username = "root"; // Ganti jika user MySQL berbeda
-        String password = "";     // Ganti jika ada password untuk MySQL
+        String username = "root"; 
+        String password = "";     
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
 
-        // Ambil data dari form
         String name = request.getParameter("productName");
         String quantity = request.getParameter("productQuantity");
         String price = request.getParameter("productPrice");
 
         try {
-            // Koneksi ke database
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, username, password);
 
-            // Query untuk insert data
             String sql = "INSERT INTO Products (productName, productQuantity, productPrice) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, name);

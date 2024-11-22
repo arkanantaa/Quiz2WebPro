@@ -10,65 +10,85 @@
     <link rel="stylesheet" type="text/css" href="css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
     <title>Storify - Product List</title>
+    <style>
+        .delete-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <ul>
-        <li><a class="active" href="dashboard.jsp"><img src="resource/logo.png" height="20px"></a></li>
-        <li><a href="InputProduct.jsp">Input Product</a></li>
-        <li><a href="Profile.jsp">Profile</a></li>
-    </ul>
+<!-- Navigation Bar -->
+<ul>
+    <li><a class="active" href="dashboard.jsp"><img src="resource/logo.png" height="20px"></a></li>
+    <li><a href="InputProduct.jsp">Input Product</a></li>
+    <li><a href="Profile.jsp">Profile</a></li>
+</ul>
 
-    <!-- Header Section -->
-    <header>
-        <h1>Welcome to Storify - Product List</h1>
-    </header>
+<!-- Header Section -->
+<header>
+    <h1>Welcome to Storify - Product List</h1>
+</header>
 
-    <!-- Main Content -->
-    <main>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%
-                // Database Connection and Query Execution
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String url = "jdbc:mysql://localhost:3306/storify"; // Adjust DB name if necessary
-                    String username = "root"; // Adjust username if different
-                    String password = ""; // Adjust password if different
-                    String query = "SELECT * FROM products";
+<!-- Main Content -->
+<main>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <%
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/storify";
+            String username = "root";
+            String password = "";
+            String query = "SELECT * FROM products";
 
-                    Connection conn = DriverManager.getConnection(url, username, password);
-                    Statement stmt = conn.createStatement();
-                    ResultSet rs = stmt.executeQuery(query);
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
 
-                    while (rs.next()) {
-                %>
-                <tr>
-                    <td><%= rs.getInt("ProductId") %></td>
-                    <td><%= rs.getString("ProductName") %></td>
-                    <td><%= rs.getInt("ProductQuantity") %></td>
-                    <td><%= rs.getDouble("ProductPrice") %></td>
-                </tr>
-                <%
-                    }
-                    rs.close();
-                    stmt.close();
-                    conn.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    out.println("<tr><td colspan='5'>Error retrieving products.</td></tr>");
-                }
-                %>
-            </tbody>
-        </table>
-    </main>
+            while (rs.next()) {
+        %>
+            <tr>
+                <td><%= rs.getInt("ProductId") %></td>
+                <td><%= rs.getString("ProductName") %></td>
+                <td><%= rs.getInt("ProductQuantity") %></td>
+                <td><%= rs.getDouble("ProductPrice") %></td>
+                <td>
+                    <form action="DeleteProductServlet" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                        <input type="hidden" name="productID" value="<%= rs.getInt("ProductId") %>">
+                        <input type="hidden" name="productName" value="<%= rs.getString("ProductName") %>">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <%
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<tr><td colspan='5'>Error retrieving products.</td></tr>");
+        }
+        %>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

@@ -16,30 +16,26 @@ public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = "jdbc:mysql://localhost:3306/Storify";
-        String username = "root"; // Ganti jika user MySQL berbeda
-        String password = "";     // Ganti jika ada password untuk MySQL
+        String username = "root";
+        String password = "";     
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
 
-        // Ambil data dari form
         String userName = request.getParameter("txtUsername");
         String fullName = request.getParameter("txtFullName");
         String email = request.getParameter("txtEmail");
         String address = request.getParameter("txtAddress");
         String passwordInput = request.getParameter("txtPassword");
 
-        // Format Date of Birth
         String dobDay = request.getParameter("dobDay");
         String dobMonth = request.getParameter("dobMonth");
         String dobYear = request.getParameter("dobYear");
-        String dateOfBirth = dobYear + "-" + dobMonth + "-" + dobDay; // Format YYYY-MM-DD
+        String dateOfBirth = dobYear + "-" + dobMonth + "-" + dobDay; 
 
         try {
-            // Koneksi ke database
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, username, password);
 
-            // Query untuk insert data
             String sql = "INSERT INTO Users (UserEmail, UserName, UserPassword, UserDOB, UserFullName, UserAddress) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
