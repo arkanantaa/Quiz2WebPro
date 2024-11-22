@@ -11,16 +11,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
     <title>Storify - Product List</title>
     <style>
-        .delete-btn {
-            background-color: #ff4444;
-            color: white;
-            border: none;
+        .btn {
             padding: 5px 10px;
+            border: none;
             border-radius: 3px;
             cursor: pointer;
+            margin: 2px;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #ff4444;
         }
         .delete-btn:hover {
             background-color: #cc0000;
+        }
+        .update-btn {
+            background-color: #4CAF50;
+        }
+        .update-btn:hover {
+            background-color: #45a049;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
         }
     </style>
 </head>
@@ -46,7 +60,7 @@
                 <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Action</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -63,17 +77,26 @@
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
+                int productId = rs.getInt("ProductId");
         %>
             <tr>
-                <td><%= rs.getInt("ProductId") %></td>
+                <td><%= productId %></td>
                 <td><%= rs.getString("ProductName") %></td>
                 <td><%= rs.getInt("ProductQuantity") %></td>
                 <td><%= rs.getDouble("ProductPrice") %></td>
-                <td>
-                    <form action="DeleteProductServlet" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
-                        <input type="hidden" name="productID" value="<%= rs.getInt("ProductId") %>">
+                <td class="action-buttons">
+                    <!-- Update Form -->
+                    <form action="UpdateProductServlet" method="GET" style="display: inline;">
+                        <input type="hidden" name="productId" value="<%= productId %>">
+                        <button type="submit" class="btn update-btn">Update</button>
+                    </form>
+                    
+                    <!-- Delete Form -->
+                    <form action="DeleteProductServlet" method="POST" style="display: inline;" 
+                          onsubmit="return confirm('Are you sure you want to delete this product?');">
+                        <input type="hidden" name="productID" value="<%= productId %>">
                         <input type="hidden" name="productName" value="<%= rs.getString("ProductName") %>">
-                        <button type="submit" class="delete-btn">Delete</button>
+                        <button type="submit" class="btn delete-btn">Delete</button>
                     </form>
                 </td>
             </tr>
